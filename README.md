@@ -4,6 +4,7 @@ The devlopment environment is Spark setup on top of a JDK in a Python environmen
 
 Datasets used:
 * Local machine processing ml-100k found [here](https://grouplens.org/datasets/movielens/100k/).
+* Where no link is provided, the data is provided in the course content
 
 [Windows setup instructions](https://sundog-education.com/spark-python/); follow explicitly because Windows requires workarounds to run Spark of course. 😢
 

@@ -1,4 +1,5 @@
 from pyspark import SparkConf, SparkContext
+from config import DATA_DIR
 
 conf = SparkConf().setMaster("local").setAppName("FriendsByAge")
 sc = SparkContext(conf = conf)
@@ -11,7 +12,7 @@ def parseLine(line):
 
 # parse file & generate raw data list
 # data is simulated social network user list, with their age and # of friends
-lines = sc.textFile("file:///C:/Users/nyoun/repos/python-spark/data/fakefriends.csv")
+lines = sc.textFile(f"{DATA_DIR}/fakefriends.csv")
 rdd = lines.map(parseLine)
 
 # aggregate data such that the output is a k/v list where
