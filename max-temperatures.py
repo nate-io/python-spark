@@ -12,11 +12,18 @@ def parseLine(line):
     temperature = float(fields[3]) * 0.1 * (9.0 / 5.0) + 32.0
     return (stationID, entryType, temperature)
 
-lines = sc.textFile(f"{DATA_DIR}//1800.csv")
+# parse the data file
+lines = sc.textFile(f"{DATA_DIR}/1800.csv")
 parsedLines = lines.map(parseLine)
-minTemps = parsedLines.filter(lambda x: "TMIN" in x[1])
+
+# filter data for rows which are TMAX observations
+minTemps = parsedLines.filter(lambda x: "TMAX" in x[1])
+# construct tuples where k is station and v is temp
 stationTemps = minTemps.map(lambda x: (x[0], x[2]))
-minTemps = stationTemps.reduceByKey(lambda x, y: min(x,y))
+# find the max temp for each unique key
+minTemps = stationTemps.reduceByKey(lambda x, y: max(x,y))
+
+# take action (Spark finally does work here, DAG constructed from above)
 results = minTemps.collect()
 
 for result in results:
