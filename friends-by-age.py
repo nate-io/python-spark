@@ -16,7 +16,7 @@ rdd = lines.map(parseLine)
 
 # aggregate data such that the output is a k/v list where
 # k == the age
-# v == tuple (sum of friends for this age, number of users with this age)
+# v == tuple (sum of friends for k age, number of users with k age)
 totalsByAge = rdd.mapValues(lambda x: (x, 1)).reduceByKey(lambda x, y: (x[0] + y[0], x[1] + y[1]))
 
 # reduce the age value list to display a mean number of friends for each age 
