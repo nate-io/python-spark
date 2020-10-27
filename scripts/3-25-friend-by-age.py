@@ -21,7 +21,7 @@ friendsByAge = raw.select("age", "friends")
 # friendsByAge.groupBy("age").agg(func.round(func.avg("friends"), 2)).sort("age").show()
 
 # add custom column name 
-friendsByAge.groupBy("age").agg(func.round(func.avg("friends"), 2)) \
-    .alias("friends_avg").sort("age").show()
+friendsByAge.groupBy("age").agg(func.round(func.avg("friends"), 2)
+    .alias("friends_avg")).sort("age").show()
 
 spark.stop()
